@@ -36,4 +36,8 @@ function createAddQuoteForm()  {
     const newQoute = newQuoteText.value;
     const newCategory = newQuoteCategory.value;
     qoutes.push({text: newQoute, category: newCategory});
+    const newQouteElement = document.createElement('span');
+    const newQouteElementTextNode = document.createTextNode(newQoute);
+    newQouteElement.appendChild(newQouteElementTextNode);
+    quoteDisplay.appendChild(newQouteElement);
 }
