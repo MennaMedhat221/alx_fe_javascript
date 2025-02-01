@@ -27,3 +27,13 @@ function showRandomQuote(){
     quoteDisplay.innerHTML = quote.text;
 }
 btn.addEventListener('click', showRandomQuote);
+
+
+const newQuoteText = document.getElementById('newQuoteText');
+const newQuoteCategory = document.getElementById('newQuoteCategory');
+
+function addQuote()  {
+    const newQoute = newQuoteText.value;
+    const newCategory = newQuoteCategory.value;
+    qoutes.push({text: newQoute, category: newCategory});
+}
