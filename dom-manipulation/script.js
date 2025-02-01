@@ -32,7 +32,7 @@ btn.addEventListener('click', showRandomQuote);
 const newQuoteText = document.getElementById('newQuoteText');
 const newQuoteCategory = document.getElementById('newQuoteCategory');
 
-function addQuote()  {
+function createAddQuoteForm()  {
     const newQoute = newQuoteText.value;
     const newCategory = newQuoteCategory.value;
     qoutes.push({text: newQoute, category: newCategory});
