@@ -252,26 +252,38 @@ class QuoteSyncManager {
     async syncQuotes() {
         try {
             this.updateSyncStatus('syncing');
-            
+    
+            // Fetch existing quotes from server
             const serverQuotes = await this.fetchQuotesFromServer();
+    
+            // Merge local and server quotes
             const { merged, conflicts } = this.mergeQuotes(quotes, serverQuotes);
-            
+    
             if (conflicts.length > 0) {
                 this.conflicts = conflicts;
                 localStorage.setItem(STORAGE_KEYS.SYNC_CONFLICTS, JSON.stringify(conflicts));
-                this.showNotification(`${conflicts.length} quote conflicts found. Click "Resolve Conflicts" to review.`, 'warning');
-                this.showConflictResolution();
+                this.showNotification(`${conflicts.length} quote conflicts found.`, 'warning');
             }
-            
+    
+            // Save merged quotes locally
             quotes = merged;
             saveQuotes();
-            
+    
+            // Send quotes to server
+            await fetch(API_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ quotes })
+            });
+    
             this.lastSyncTimestamp = Date.now();
             localStorage.setItem(STORAGE_KEYS.LAST_SYNC, this.lastSyncTimestamp);
-            
+    
             this.showNotification('Sync completed successfully');
             this.updateSyncStatus('synced');
-            
+    
             populateCategories();
             showRandomQuote();
         } catch (error) {
