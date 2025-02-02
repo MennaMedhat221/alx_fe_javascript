@@ -281,7 +281,7 @@ class QuoteSyncManager {
             this.lastSyncTimestamp = Date.now();
             localStorage.setItem(STORAGE_KEYS.LAST_SYNC, this.lastSyncTimestamp);
     
-            this.showNotification('Sync completed successfully');
+            this.showNotification('Quotes synced with server');
             this.updateSyncStatus('synced');
     
             populateCategories();
