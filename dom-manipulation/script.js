@@ -49,7 +49,7 @@ function initializeQuotes() {
     
     // Initialize filtering system
     populateCategories();
-    initializeFiltering();
+    filterQuote();
 }
 
 function saveQuotes() {
@@ -161,7 +161,7 @@ function importFromJsonFile(event) {
     event.target.value = ''; // Reset file input
 }
 
-function initializeFiltering() {
+function filterQuote() {
     // Save category selection
     categorySelect.addEventListener('change', () => {
         localStorage.setItem(STORAGE_KEYS.LAST_CATEGORY, categorySelect.value);
